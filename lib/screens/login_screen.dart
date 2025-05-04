@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/cubit/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/cubit/login_cubit/login_cubit.dart';
 import 'package:chat_app/helper/show_snack_bar.dart';
 
@@ -29,6 +30,8 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
+          BlocProvider.of<ChatCubit>(context).getMessages();
+          Navigator.pushReplacementNamed(context, 'ChatScreen', arguments: email);
           isLoading = false;
           showSnackBar(context, state.message);
         } else if (state is LoginFailure) {

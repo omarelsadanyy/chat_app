@@ -19,7 +19,7 @@ class ChatBubble extends StatelessWidget {
           ),
         ),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.centerRight,
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             padding: EdgeInsets.only(left:16,top: 22,bottom :22,right :16),
@@ -27,7 +27,7 @@ class ChatBubble extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
-                bottomRight: Radius.circular(30),   
+                bottomLeft: Radius.circular(30),   
               ),
               color: kprimaryColor
             ),
@@ -64,7 +64,7 @@ class ChatBubbleSecondUser extends StatelessWidget {
           ),
         ),
         Align(
-          alignment: Alignment.centerRight,
+          alignment: Alignment.centerLeft,
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             padding: EdgeInsets.only(left:16,top: 22,bottom :22,right :16),
@@ -72,7 +72,7 @@ class ChatBubbleSecondUser extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
-                bottomLeft: Radius.circular(30),   
+                bottomRight: Radius.circular(30),   
               ),
               color: kprimaryColorLight
             ),

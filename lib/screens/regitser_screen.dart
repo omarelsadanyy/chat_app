@@ -1,10 +1,8 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/cubit/register_cubit/register_cubit.dart';
 import 'package:chat_app/helper/show_snack_bar.dart';
-import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -26,7 +24,8 @@ class RegitserScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
-        } else if (state is RegisterSuccess) {
+        } else if (state is RegisterSuccess) { 
+          Navigator.pop(context);
           isLoading = false;
           showSnackBar(context, state.message);
         } else if (state is RegisterFailure) {

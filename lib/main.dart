@@ -1,3 +1,4 @@
+import 'package:chat_app/cubit/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/cubit/login_cubit/login_cubit.dart';
 import 'package:chat_app/cubit/register_cubit/register_cubit.dart';
 import 'package:chat_app/firebase_options.dart';
@@ -28,6 +29,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ChatCubit(),
         ),
       ],
       child: MaterialApp(
