@@ -89,13 +89,5 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // void _onSubmitted(String value, String email) {
-  //   messageCollection.add({'message': value, 'createdAt': Timestamp.now(), 'id': email});
-  //   scrollController.animateTo(
-  //     0,
-  //     duration: Duration(seconds: 1),
-  //     curve: Curves.easeIn,
-  //   );
-  //   messageController.clear();
-  // }
+ 
 }

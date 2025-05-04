@@ -23,10 +23,18 @@ class RegisterCubit extends Cubit<RegisterState> {
           email: email.trim(),
           password: password.trim(),
         );
-      await Future.delayed(Duration(seconds: 2));
+      
       emit(RegisterSuccess('Registration successful'));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        emit(RegisterFailure('The password provided is too weak.'));
+      } else if (e.code == 'email-already-in-use') {
+        emit(RegisterFailure('The account already exists for that email.'));
+      } else {
+        emit(RegisterFailure('An unknown error occurred.'));
+      }
     } catch (e) {
-      emit(RegisterFailure('An error occurred. Please try again.'));
+      emit(RegisterFailure('An unknown error occurred.'));
     }
   }
 }
