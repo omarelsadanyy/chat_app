@@ -1,6 +1,6 @@
+import 'package:chat_app/BLoc/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/cubit/chat_cubit/chat_cubit.dart';
-import 'package:chat_app/cubit/login_cubit/login_cubit.dart';
 import 'package:chat_app/helper/show_snack_bar.dart';
 
 import 'package:chat_app/screens/regitser_screen.dart';
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     CustomFieldTextField(
-                      obscureText: BlocProvider.of<LoginCubit>(context).isPasswordVisible,
+                      obscureText: isPasswordVisible,
                       onChanged: (data) {
                         password = data;
                       },
@@ -108,11 +108,8 @@ class LoginScreen extends StatelessWidget {
                             color: Colors.grey,
                           ),
                           onPressed: () {
-                            
-                           
-                              BlocProvider.of<LoginCubit>(context)
-                                  .togglePasswordVisibility();
-                            
+                              BlocProvider.of<AuthBloc>(context)
+                                  .add(LoginPasswordVisibiltyEvent());
                           },
                         ),
                       ),
@@ -122,9 +119,8 @@ class LoginScreen extends StatelessWidget {
                       text: 'Sign In',
                       onTap: () async {
                         if (formkey.currentState!.validate()) {
-                          BlocProvider.of<LoginCubit>(context).loginUser(
-                            email: email!,
-                            password: password!,
+                          BlocProvider.of<AuthBloc>(context).add(
+                            LoginEvent(email: email!, password: password!)
                           );
                         }
                       },

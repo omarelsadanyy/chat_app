@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomFieldTextField extends StatelessWidget {
-    CustomFieldTextField({ this.hintText, this.onChanged, this.obscureText=false, this.decoration});
+    CustomFieldTextField({super.key,  this.hintText, this.onChanged, this.obscureText=false, this.decoration});
   final String? hintText ;
   Function(String)? onChanged;
   bool? obscureText;
@@ -14,6 +14,7 @@ class CustomFieldTextField extends StatelessWidget {
           if(data!.isEmpty){
             return 'Field is required';
           }
+          return null;
         },
         onChanged: onChanged, 
             decoration: decoration ?? InputDecoration(

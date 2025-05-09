@@ -1,8 +1,9 @@
+import 'package:chat_app/BLoc/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/constants.dart';
-import 'package:chat_app/cubit/register_cubit/register_cubit.dart';
 import 'package:chat_app/helper/show_snack_bar.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -20,11 +21,11 @@ class RegitserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
-        } else if (state is RegisterSuccess) { 
+        } else if (state is RegisterSuccess) {
           Navigator.pop(context);
           isLoading = false;
           showSnackBar(context, state.message);
@@ -101,10 +102,11 @@ class RegitserScreen extends StatelessWidget {
                             color: Colors.grey,
                           ),
                           onPressed: () {
-                           
-                            BlocProvider.of<RegisterCubit>(context)
-                                .togglePasswordVisibility();
-                            
+                            BlocProvider.of<AuthBloc>(context).add(
+                              RegisterPasswordVisibiltyEvent(
+                                
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -115,9 +117,8 @@ class RegitserScreen extends StatelessWidget {
                       onTap: () async {
                         if (formkey.currentState!.validate()) {
                           if (email != null && password != null) {
-                           BlocProvider.of<RegisterCubit>(context).registerUser(
-                              email: email!,
-                              password: password!,
+                            BlocProvider.of<AuthBloc>(context).add(
+                              RegisterEvent(email: email!, password: password!),
                             );
                           }
                         }
